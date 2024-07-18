@@ -1,0 +1,85 @@
+elasticconfig:
+  feedindex: estest-index1
+
+
+outlet_rss_configs:
+
+  thediplomat_rssfeed_v1_global:
+    feedlink: "https://thediplomat.com/feed/"
+    sourceoutlet: TheDiplomat
+    feed_index: estest-index1
+    enrich_config: ""
+
+  economist_rssfeed_v1_briefings:
+    feedlink: "https://www.economist.com/briefing/rss.xml"
+    sourceoutlet: Economist
+    feed_index: estest-index1
+    enrich_config: ""
+
+  economist_rssfeed_v1_asia:
+    feedlink: "https://www.economist.com/asia/rss.xml"
+    sourceoutlet: Economist
+    feed_index: estest-index1
+    enrich_config: ""
+
+  politico_rssfeed_v1_economics:
+    feedlink: "https://rss.politico.com/economy.xml"
+    sourceoutlet: Politico
+    feed_index: estest-index1
+    enrich_config: ""
+
+  politico_rssfeed_v1_politics:
+    feedlink: "https://rss.politico.com/politics-news.xml"
+    sourceoutlet: Politico
+    feed_index: estest-index1
+    enrich_config: ""
+
+  politico_rssfeed_v1_energy:
+    feedlink: "https://rss.politico.com/energy.xml"
+    sourceoutlet: Politico
+    feed_index: estest-index1
+    enrich_config: ""
+
+  politico_rssfeed_v1_defense:
+    feedlink: "https://rss.politico.com/defense.xml"
+    sourceoutlet: Politico
+    feed_index: estest-index1
+    enrich_config: ""
+
+  politico_rssfeed_v1_politicopulse:
+    feedlink: "https://rss.politico.com/politicopulse.xml"
+    sourceoutlet: Politico
+    feed_index: estest-index1
+    enrich_config: ""
+
+  SCMP_rssfeed_v1_CNdefense:
+    feedlink: "https://www.scmp.com/rss/318199/feed"
+    sourceoutlet: SCMP
+    feed_index: estest-index1
+    enrich_config: ""
+
+  thehindu_rssfeed_v1_international:
+    feedlink: "https://www.thehindu.com/news/international/feeder/default.rss"
+    sourceoutlet: TheHindu
+    feed_index: estest-index1
+    enrich_config: ""
+
+  thehindu_rssfeed_v1_india:
+    feedlink: "https://www.thehindu.com/news/national/feeder/default.rss"
+    sourceoutlet: TheHindu
+    feed_index: estest-index1
+    enrich_config: ""
+
+  thehindu_rssfeed_v1_instates:
+    feedlink: "https://www.thehindu.com/news/states/feeder/default.rss"
+    sourceoutlet: TheHindu
+    feed_index: estest-index1
+    enrich_config: ""
+
+  wsj_rssfeed_v1_world:
+    feedlink: "https://feeds.a.dj.com/rss/RSSWorldNews.xml"
+    sourceoutlet: WSJ
+    feed_index: estest-index1
+    enrich_config: ""
+
+
