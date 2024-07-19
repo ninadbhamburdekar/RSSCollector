@@ -90,7 +90,10 @@ def process_feed(feed_id, feed_link, sourceoutlet, feed_index, esclient):
                 print("No change to item %s since published time %s" %(doc_data_old.body['_id'], doc_data_old.body['_source']['data']['published']))
 
         except Exception as e:
-            resp = esclient.index(index=feed_index, id=feed_id+"_"+itm['id'], document=doc_data)
+            try:
+                resp = esclient.index(index=feed_index, id=feed_id+"_"+itm['id'], document=doc_data)
+            except Exception as e:
+                print("Exception %s while indexing item:  %s" %(e, doc_data))
 
     return True
 
