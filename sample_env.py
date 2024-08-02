@@ -36,3 +36,12 @@ openai_api_token = os.environ.get('OPENAIAPI_TOKEN',
                                    'YOUR_TOKEN')
 
 
+MAILGUN_DOMAIN = os.environ.get('MAILGUN_DOMAIN',
+                                   'YOUR_MAILGUN_DOMAIN')
+MAILGUN_API_KEY= os.environ.get('MAILGUN_API_KEY',
+                                   'YOUR_MAILGUN_API_KEY')
+
+MAILGUN_SEND_CONFIG = {
+                       'from': 'AI Collect Summary <' + 'aisummarize@' + MAILGUN_DOMAIN + '>',
+                       'to': ['EMAIL_RECIPIENT_1', 'EMAIL_RECIPIENT_2']
+                       }

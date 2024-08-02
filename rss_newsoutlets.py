@@ -28,7 +28,7 @@ def main():
     parser = ArgumentParser()
     parser.add_argument("-f", "--feed", dest="feedconfig", default="ALL",
                         help="Run a specific feed config")
-    parser.add_argument("-l", "--lookback", dest="lookback", default="96",
+    parser.add_argument("-l", "--lookback", dest="lookback", default="150",
                         help="Override lookback time (default is 96hrs)")
     args = parser.parse_args()
 
@@ -45,13 +45,16 @@ def main():
 
     else:
         for config in yamlconfig['outlet_rss_configs']:
-            print("Processing config: {}".format(config))
-            stat = process_feed(config,
-                         yamlconfig['outlet_rss_configs'][config]['feedlink'],
-                         yamlconfig['outlet_rss_configs'][config]['sourceoutlet'],
-                         FEEDINDEX,
-                         esclient)
-            print(stat)
+            try:
+                print("Processing config: {}".format(config))
+                stat = process_feed(config,
+                             yamlconfig['outlet_rss_configs'][config]['feedlink'],
+                             yamlconfig['outlet_rss_configs'][config]['sourceoutlet'],
+                             FEEDINDEX,
+                             esclient)
+                print(stat)
+            except Exception as e:
+                print("Exception processing poll config! %s: %s" %(config, e))
 
     print("Done!")
 
