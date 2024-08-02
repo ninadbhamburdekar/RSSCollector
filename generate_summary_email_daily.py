@@ -80,6 +80,7 @@ def email_summary(esclient):
         data={
             'from': MAILGUN_SEND_CONFIG['from'],
             'to': MAILGUN_SEND_CONFIG['to'],
+            'bcc': MAILGUN_SEND_CONFIG['bcc'],
             'subject': 'News AI Summary '+datetime.now().strftime("%b ")+datetime.now().strftime("%d").lstrip('0')+", "+datetime.now().strftime("%Y"),
             'text': json.dumps(topics, indent=4),
             'html': email_content
