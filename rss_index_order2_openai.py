@@ -43,11 +43,11 @@ def main():
                         help="Override lookback time (default is 24hrs)")
     args = parser.parse_args()
 
-    weekly = weekly_summary(openaiclient, esclient)
+    daily = daily_summary(openaiclient, esclient)
 
     print("Done!")
 
-def weekly_summary(openaiclient, esclient):
+def daily_summary(openaiclient, esclient):
 
     summaries = []
     query = {"bool": {"must": [{"range": {"eventtime": {"gte": "now-1d", "lt": "now"}}}, {"match": {"process_order": 0}}]}}
