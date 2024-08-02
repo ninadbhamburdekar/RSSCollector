@@ -58,12 +58,18 @@ def email_summary(esclient):
         topic_name = topic.replace('_', ' ')
         topics[topic_name.title()] = jsonblob['topics'][topic]
 
+    geninfo = {}
+    geninfo['timegenerated'] = datetime.fromisoformat(esdata.body['hits']['hits'][-1]['_source']['eventtime']).strftime("%b %d, %Y %H:%m UTC")
+    geninfo['creditsusage'] = str(esdata.body['hits']['hits'][-1]['_source']['metadata']['enrich2']['openaiusage']).replace('(', ' ').replace(')', ' ').replace('CompletionUsage', '')
+
+
+
     environment = jinja2.Environment(loader=jinja2.FileSystemLoader("."))
     template = environment.get_template("email_template.html")
 
-    email_content = template.render(topics=topics)
+    email_content = template.render(topics=topics, geninfo=geninfo)
     with open("rendered_email.html", mode="w", encoding="utf-8") as results:
-        results.write(template.render(topics=topics))
+        results.write(template.render(topics=topics, geninfo=geninfo))
 
     response = requests.post(
         'https://api.mailgun.net/v3/' + MAILGUN_DOMAIN + '/messages',
