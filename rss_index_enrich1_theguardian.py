@@ -50,7 +50,7 @@ def main():
 
     else:
         for config in yamlconfig['outlet_rss_configs']:
-            if 'thehindu' in config:
+            if 'theguardian' in config:
                 print("Processing config: {}".format(config))
                 stat = enrich_feed_docs(yamlconfig['outlet_rss_configs'][config]['sourceoutlet'],
                              FEEDINDEX, esclient=esclient)
@@ -78,7 +78,6 @@ def enrich_feed_docs(feed_id, feed_index, esclient):
 
         feed_docs = esclient.search(index=feed_index, query=query, size=10000)
 
-
         print("Got %s results: " % len(feed_docs.raw['hits']['hits']))
 
         for result in feed_docs.raw['hits']['hits']:
@@ -86,7 +85,7 @@ def enrich_feed_docs(feed_id, feed_index, esclient):
             try:
 
                 htmlcontent = get_url_content(result['_source']['data']['links'][0]['href'])
-                text  = extract_text_content(htmlcontent, re.search('(\\d+$)', result['_source']['document_id'])[0])
+                text  = extract_text_content(htmlcontent, 'maincontent')
                 text = text.replace(u'\xa0', u' ')
 
                 if 'post_process' not in result['_source'].keys():
@@ -118,8 +117,7 @@ def get_url_content(url):
 def extract_text_content(htmlcontent, identifier):
     soup = BeautifulSoup(htmlcontent, 'html.parser')
     content = ""
-    for res in soup.find_all("div", id="content-body-" + identifier)[0].find_all("p")[0:-1]:
-        content = content + " " + res.get_text()
+    content = soup.find_all("div", id="maincontent")[-1].get_text()
 
     return content.strip()
 

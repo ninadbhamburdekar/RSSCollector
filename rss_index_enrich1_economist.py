@@ -47,7 +47,8 @@ def main():
         for config in yamlconfig['outlet_rss_configs']:
             if 'economist' in config:
                 print("Processing config: {}".format(config))
-                stat = enrich_feed_docs(config, FEEDINDEX, esclient=esclient)
+                stat = enrich_feed_docs(yamlconfig['outlet_rss_configs'][config]['sourceoutlet'],
+                                        FEEDINDEX, esclient=esclient)
                 print(stat)
 
     print("Done!")
@@ -55,12 +56,11 @@ def main():
 
 def enrich_feed_docs(feed_id, feed_index, esclient):
 
-        #query = {"match_phrase": {"source_outlet": "TheHindu"}}
         query = {"bool":
                      {
                          "must": [
                              {"range": {"eventtime": {"gte": "now-365d", "lt": "now"}}},
-                             {"match": {"source": feed_id}}
+                             {"match": {"source_outlet": feed_id}}
                             ],
                          "must_not": [
                              {"exists": {"field": "post_process.enrich1"}}
@@ -98,6 +98,8 @@ def enrich_feed_docs(feed_id, feed_index, esclient):
                     result['_source']['metadata'] = {}
                     result['_source']['metadata']['enrich1'] = js['props']['pageProps']
 
+                result['_source']['process_order'] = 1
+
                 esclient.update(index=feed_index, id=result['_id'], doc=result['_source'])
 
             except Exception as e:
@@ -128,8 +130,9 @@ def extract_text_content(htmlcontent):
                 print("Grabbed para #%s: %s" %(paracount, content))
 
     except Exception as e:
+
         content = soup.text.strip().replace("\n", '')
-        js = {'props': {'pageProps': "NULL"}}
+        js = {'props': {'pageProps': {}}}
 
     return content.strip(), js
 

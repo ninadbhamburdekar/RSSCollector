@@ -70,4 +70,9 @@ outlet_rss_configs:
     sourceoutlet: WSJ
     enrich_config: ""
 
+  theguardian_rssfeed_v1_world:
+      feedlink: "https://www.theguardian.com/international/rss"
+      sourceoutlet: TheGuardian
+      enrich_config: ""
+
 
