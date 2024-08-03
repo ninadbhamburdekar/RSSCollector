@@ -1,0 +1,16 @@
+
+watcher_configs:
+  watcher01:
+    email: "watcher01@local.local"
+    searchterms:
+      - "kansas"
+      - "protest"
+      - "covid"
+      - "stocks"
+  watcher02:
+    email: "watcher02@local.local"
+    searchterms:
+      - "ransomware"
+      - "darkweb"
+      - "hack"
+      - "Energy"
