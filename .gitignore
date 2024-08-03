@@ -165,5 +165,7 @@ env.py
 .venv*
 rendered_*
 email_template*.html
+watcher_config.yaml
+
 
 
